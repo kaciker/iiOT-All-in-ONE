@@ -45,74 +45,8 @@ services:
     ports:
       - 1883:1883
     image: chronograf:latest
-
-  influxdb:
-    image: influxdb:latest
-    ports:
-      - 8086:8086
-    volumes:
-      - influxdb-storage:/var/lib/influxdb
-    environment:
-      - INFLUXDB_DB=db0
-      - INFLUXDB_ADMIN_USER=${INFLUXDB_USERNAME}
-      - INFLUXDB_ADMIN_PASSWORD=${INFLUXDB_PASSWORD}
-
-  chronograf:   
-    image: chronograf:latest
-    ports:
-      - 8888:8888
-    volumes:
-      - chronograf-storage:/var/lib/chronograf
-    depends_on:
-      - influxdb
-    environment:
-      - INFLUXDB_URL=http://influxdb:8086
-      - INFLUXDB_USERNAME=${INFLUXDB_USERNAME}
-      - INFLUXDB_PASSWORD=${INFLUXDB_PASSWORD}
-
-  grafana:
-    image: grafana/grafana:latest
-    ports:
-      - 3000:3000
-    volumes:
-      - grafana-storage:/var/lib/grafana
-      - ./grafana-provisioning/:/etc/grafana/provisioning
-    depends_on:
-      - influxdb
-    environment:
-      - GF_SECURITY_ADMIN_USER=${GRAFANA_USERNAME}
-      - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_PASSWORD}
-
-  portainer:
-    image: portainer/portainer
-    command: -H unix:///var/run/docker.sock
-    restart: always
-    ports:
-      - 9000:9000
-      - 8000:8000
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - portainer_data:/data
-  node-red:
-    image: nodered/node-red:latest
-    restart: always
-    environment:
-      - TZ=Europe/Amsterdam
-    ports:
-      - 1880:1880
-    networks:
-      - node-red-net
-    volumes:
-      - node-red-data:/data 
      
 volumes:
   postgresqldata:
   redisdata:
-  influxdb-storage:
-  chronograf-storage:
-  grafana-storage:
-  portainer_data:  
-  node-red-data:
-  
-networks:
-  node-red-net:
+
