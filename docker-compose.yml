@@ -3,13 +3,11 @@ version: "3"
 services:
   chirpstack-network-server:
     image: chirpstack/chirpstack-network-server:3
-    restart: always
     volumes:
       - ./configuration/chirpstack-network-server:/etc/chirpstack-network-server
 
   chirpstack-application-server:
     image: chirpstack/chirpstack-application-server:3
-    restart: always
     ports:
       - 8080:8080
     volumes:
@@ -17,7 +15,6 @@ services:
 
   chirpstack-gateway-bridge:
     image: chirpstack/chirpstack-gateway-bridge:3
-    restart: always
     ports:
       - 1700:1700/udp
     volumes:
@@ -31,7 +28,6 @@ services:
 
   postgresql:
     image: postgres:9.6-alpine
-    restart: always
     environment:
       - POSTGRES_PASSWORD=root
     volumes:
@@ -46,7 +42,6 @@ services:
 
   mosquitto:
     image: eclipse-mosquitto
-    restart: always
     ports:
       - 1883:1883
     image: chronograf:latest
@@ -55,7 +50,6 @@ services:
     image: influxdb:latest
     ports:
       - 8086:8086
-    restart: always  
     volumes:
       - influxdb-storage:/var/lib/influxdb
     environment:
@@ -67,7 +61,6 @@ services:
     image: chronograf:latest
     ports:
       - 8888:8888
-    restart: always  
     volumes:
       - chronograf-storage:/var/lib/chronograf
     depends_on:
@@ -79,7 +72,6 @@ services:
 
   grafana:
     image: grafana/grafana:latest
-    restart: always
     ports:
       - 3000:3000
     volumes:
