@@ -93,7 +93,18 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - portainer_data:/data
-
+  node-red:
+    image: nodered/node-red:latest
+    restart: always
+    environment:
+      - TZ=Europe/Amsterdam
+    ports:
+      - 1880:1880
+    networks:
+      - node-red-net
+    volumes:
+      - node-red-data:/data 
+     
 volumes:
   postgresqldata:
   redisdata:
@@ -101,3 +112,7 @@ volumes:
   chronograf-storage:
   grafana-storage:
   portainer_data:  
+  node-red-data:
+  
+networks:
+  node-red-net:
