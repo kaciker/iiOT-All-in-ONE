@@ -40,11 +40,13 @@ services:
 
   mosquitto:
     image: eclipse-mosquitto
+    restart: always
     ports:
       - 1883:1883
 
   influxdb:
     image: influxdb:latest
+    restart: always
     ports:
       - '8086:8086'
     volumes:
@@ -55,6 +57,7 @@ services:
       - INFLUXDB_ADMIN_PASSWORD=${INFLUXDB_PASSWORD}
   chronograf:
     image: chronograf:latest
+    restart: always
     ports:
       - '8888:8888'
     volumes:
@@ -67,6 +70,7 @@ services:
       - INFLUXDB_PASSWORD=${INFLUXDB_PASSWORD}
   grafana:
     image: grafana/grafana:latest
+    restart: always
     ports:
       - '3000:3000'
     volumes:
@@ -79,7 +83,7 @@ services:
       - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_PASSWORD}     
 
   portainer:
-    image: portainer/portainer:latest
+    image: portainer/portainer-ce
     command: -H unix:///var/run/docker.sock
     restart: always
     ports:
@@ -91,6 +95,7 @@ services:
 
   node-red:
     image: nodered/node-red:latest
+    restart: always
     environment:
       - TZ=Europe/Amsterdam
     ports:
