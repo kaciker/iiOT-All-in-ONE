@@ -113,5 +113,3 @@ volumes:
   portainer_data:
   node-red-data:  
 
-networks:
-  node-red-net:  
