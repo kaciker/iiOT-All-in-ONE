@@ -56,7 +56,7 @@ services:
   chronograf:
     image: chronograf:latest
     ports:
-      - '8888:8888'
+      - '127.0.0.1:8888:8888'
     volumes:
       - chronograf-storage:/var/lib/chronograf
     depends_on:
@@ -89,8 +89,12 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - portainer_data:/data
 
-
-
+  node-red:
+    image: nodered/node-red:latest
+    environment:
+      - TZ=Europe/Amsterdam
+    ports:
+      - "1880:1880"
 
 volumes:
   postgresqldata:
@@ -99,6 +103,7 @@ volumes:
   chronograf-storage:
   grafana-storage:
   portainer_data:
+  node-red-data:/data:  
 
-
-
+networks:
+  node-red-net: 
