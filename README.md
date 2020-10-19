@@ -35,8 +35,11 @@ Useful for quickly setting up a monitoring stack for performance testing. Combin
   
   Portainer: https://portainer.readthedocs.io/en/stable/deployment.html
   
-## Install full packet
-
+## Installation:
+  * Requirements:
+      - Ubuntu server 20.04 (recomneded) - 18.04
+      - Docker & Docker-Compose
+      
 To clone this repository, you need to execute the following commands:
 
 - git clone https://github.com/kaciker/iiOT-All-in-ONE.git
