@@ -5,7 +5,7 @@
 ## Chirpstack - InfluxDB - Chronograf - Grafana - Node Red - Portainer
 Coming from Brocaar for Chirpstack server deployment, and from jkehres for -InfluxDB, Chronograf,and Grafana, adding manually Portainer and noder Red from their original websites.
 
-# ChirpStack Docker   (# [brocaar](https://github.com/brocaar/chirpstack-docker)/)
+# ChirpStack Docker   (# [brocaar](https://github.com/brocaar)/)
 Brocaar (The Master) -- [repository brocaar](https://github.com/brocaar/chirpstack-docker)
   
 This repository contains a skeleton to setup the [ChirpStack](https://www.chirpstack.io)  
@@ -16,6 +16,9 @@ Please check the original doc for questions.
 
 
 # Docker-compose-influxdb-grafana (# [jkehres](https://github.com/jkehres))
+
+jkehres     -- [repository jkehres](https://github.com/jkehres/docker-compose-influxdb-grafana)
+ 
 
 Multi-container Docker app built from the following services:
 
