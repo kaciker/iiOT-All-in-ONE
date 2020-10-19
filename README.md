@@ -35,9 +35,9 @@ Useful for quickly setting up a monitoring stack for performance testing. Combin
 
 To clone this repository, you need to execute the following commands:
 
-- git clone https://github.com/kaciker/IIOT-All-in-ONE-Chirpstack-InfluxDB-Chronograf-Grafana-Node-Red-Portainer.git
+- git clone https://github.com/kaciker/iiOT-All-in-ONE.git
 
-- cd IIOT-All-in-ONE-Chirpstack-InfluxDB-Chronograf-Grafana-Node-Red-Portainer
+- cd iiOT-All-in-ONE
 
 - docker-compose up
 
