@@ -90,3 +90,5 @@ Soon I will create de docker-compose with autentification.
 Implement Github autentification on docker compose
 #### Node Red
 Implement autentificaton on docker compose
+#### Telegraf
+Implement Telegraf
