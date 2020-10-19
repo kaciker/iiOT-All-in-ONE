@@ -1,10 +1,10 @@
 # IIOT-All-in-ONE
 
-### Collecting data 
+### Collecting data from LoRaWAN, injecting directly to InfluxDB through direct integration in Chirpstack. And being available to Grafana to graphic. All topics are availables by MQTT and usables in Node-red
 
 # ** Components 
 
-## Chirpstack - Telegraf - InfluxDB - Chronograf - Grafana - Node Red - Portainer - Mosquitto
+## Chirpstack - InfluxDB - Chronograf - Grafana - Node Red - Portainer - Mosquitto
 Coming from Brocaar for Chirpstack server deployment, and from jkehres for -InfluxDB, Chronograf,and Grafana, adding manually Portainer and noder Red from their original websites.
 
 # ChirpStack Docker   (# [brocaar](https://github.com/brocaar)/)
