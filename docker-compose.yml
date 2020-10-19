@@ -50,7 +50,7 @@ services:
     links:
       - influxdb
     volumes:
-      - ./telegraf.conf:/etc/telegraf/telegraf.conf:r
+      - ./telegraf.conf:/etc/telegraf/telegraf.conf:ro
 
   influxdb:
     image: influxdb:latest
