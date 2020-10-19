@@ -22,7 +22,6 @@ services:
 
   chirpstack-geolocation-server:
     image: chirpstack/chirpstack-geolocation-server:3
-    restart: always
     volumes:
       - ./configuration/chirpstack-geolocation-server:/etc/chirpstack-geolocation-server
 
@@ -36,7 +35,6 @@ services:
 
   redis:
     image: redis:5-alpine
-    restart: always
     volumes:
       - redisdata:/data
 
@@ -44,9 +42,9 @@ services:
     image: eclipse-mosquitto
     ports:
       - 1883:1883
-    image: chronograf:latest
-     
+
 volumes:
   postgresqldata:
   redisdata:
+
 
