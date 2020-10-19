@@ -79,7 +79,7 @@ services:
       - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_PASSWORD}     
 
   portainer:
-    image: portainer/portainer
+    image: portainer/portainer:latest
     command: -H unix:///var/run/docker.sock
     restart: always
     ports:
