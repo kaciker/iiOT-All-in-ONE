@@ -19,6 +19,7 @@ Please check the original doc for questions.
 
 jkehres     -- [repository jkehres](https://github.com/jkehres/docker-compose-influxdb-grafana)
  
+* Modification, DB base name, exposition 8888 port
 
 Multi-container Docker app built from the following services:
 
