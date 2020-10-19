@@ -56,7 +56,7 @@ services:
   chronograf:
     image: chronograf:latest
     ports:
-      - '8888:8888'
+      - '127.0.0.1:8888:8888'
     volumes:
       - chronograf-storage:/var/lib/chronograf
     depends_on:
@@ -78,17 +78,27 @@ services:
       - GF_SECURITY_ADMIN_USER=${GRAFANA_USERNAME}
       - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_PASSWORD}     
 
+  portainer:
+    image: portainer/portainer
+    command: -H unix:///var/run/docker.sock
+    restart: always
+    ports:
+      - 9000:9000
+      - 8000:8000
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
 
 
 
 
-      
 volumes:
   postgresqldata:
   redisdata:
   influxdb-storage:
   chronograf-storage:
   grafana-storage:
+  portainer_data:
 
 
 
