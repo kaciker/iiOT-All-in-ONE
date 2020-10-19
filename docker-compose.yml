@@ -43,6 +43,20 @@ services:
     restart: always
     ports:
       - 1883:1883
+  telegraf:
+   image: telegraf
+   restart: always
+   environment:
+     HOST_PROC: /rootfs/proc
+     HOST_SYS: /rootfs/sys
+     HOST_ETC: /rootfs/etc
+   hostname: localhost
+   volumes:
+   - ./telegraf/telegraf.conf:/etc/telegraf/telegraf.conf:ro
+   - /var/run/docker.sock:/var/run/docker.sock:ro
+   - /sys:/rootfs/sys:ro
+   - /proc:/rootfs/proc:ro
+   - /etc:/rootfs/etc:ro      
 
   influxdb:
     image: influxdb:latest
