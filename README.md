@@ -1,4 +1,4 @@
-# IIOT-All-in-ONE    (¡¡¡¡¡¡¡ testing - NOT usable yet)
+# IIOT-All-in-ONE
 
 # ** Components 
 
@@ -10,6 +10,8 @@ Brocaar (The Master) -- [repository brocaar](https://github.com/brocaar/chirpsta
   
 This repository contains a skeleton to setup the [ChirpStack](https://www.chirpstack.io)  
 open-source LoRaWAN Network Server stack using [Docker Compose](https://docs.docker.com/compose/).  
+
+* Mosquitto included
   
 Please check the original doc for questions.
   __________________________________________
