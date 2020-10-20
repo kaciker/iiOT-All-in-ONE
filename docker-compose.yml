@@ -108,7 +108,7 @@ services:
       - portainer_data:/data
       
   node-red:
-    image: nodered/node-red:latest
+    image: nodered/node-red
     container_name: Node_Red
     environment:
       - TZ=Europe/Amsterdam
@@ -120,7 +120,7 @@ services:
       - node-red-data:/data
       
    grafana:
-     image: grafana/grafana:latest
+     image: grafana/grafana
      container_name: Grafana
      restart: always
      ports:
