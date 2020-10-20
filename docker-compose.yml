@@ -92,30 +92,17 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - portainer_data:/data
-   agent:
-    image: portainer/agent
-    environment:
-      AGENT_CLUSTER_ADDR: tasks.agent
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - /var/lib/docker/volumes:/var/lib/docker/volumes
-    networks:
-      - agent_network
-    deploy:
-      mode: global
-      placement:
-        constraints: [node.platform.os == linux]   
-
+      
   node-red:
     image: nodered/node-red:latest
-    restart: always
     environment:
       - TZ=Europe/Amsterdam
     ports:
       - "1880:1880"
+    networks:
+      - node-red-net
     volumes:
       - node-red-data:/data
-
       
 volumes:
   postgresqldata:
@@ -125,5 +112,7 @@ volumes:
   grafana-storage:
   portainer_data:
   node-red-data:  
-
+  
+networks:
+  node-red-net:
 
