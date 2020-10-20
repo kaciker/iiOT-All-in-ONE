@@ -52,47 +52,48 @@ services:
       - 1883:1883
     
   influxdb:
+    container_name: influxdb
     image: influxdb:latest
-    container_name:: InfluxDB
-    restart: always
-    ports:
-      - '8086:8086'
     volumes:
-      - influxdb-storage:/var/lib/influxdb
-    environment:
-      - INFLUXDB_DB=iiot
-      - INFLUXDB_ADMIN_USER=${INFLUXDB_USERNAME}
-      - INFLUXDB_ADMIN_PASSWORD=${INFLUXDB_PASSWORD}
-      
+      - ./influxdb:/var/lib/influxdb
+    ports:
+      - 8086:8086
+    networks:
+      - "monitoring"
+
   chronograf:
+    container_name: chronograf
     image: chronograf:latest
-    container_name: Chronograf
-    restart: always
     ports:
-      - '8888:8888'
+      - 8888:8888
     volumes:
-      - chronograf-storage:/var/lib/chronograf
-    depends_on:
-      - influxdb
+      - "./chronograf:/var/lib/chronograf"
+    networks:
+      - "monitoring"
+
+  telegraf:
+    container_name: telegraf
+    image: telegraf:latest
+    volumes:
+      - "./telegraf.conf:/etc/telegraf/telegraf.conf:ro"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    networks:
+      - "monitoring"
+
+  kapacitor:
+    container_name: kapacitor
+    image: kapacitor:latest
     environment:
-      - INFLUXDB_URL=http://influxdb:8086
-      - INFLUXDB_USERNAME=${INFLUXDB_USERNAME}
-      - INFLUXDB_PASSWORD=${INFLUXDB_PASSWORD}
-      
-  grafana:
-    image: grafana/grafana:latest
-    container_name: Grafana
-    restart: always
+      - KAPACITOR_INFLUXDB_0_URLS_0=http://influxdb:8086
+      - KAPACITOR_HOSTNAME=kapacitor
+      - KAPACITOR_LOGGING_LEVEL=INFO
+      - KAPACITOR_REPORTING_ENABLED=false
+    volumes:
+      - "./kapacitor:/var/lib/kapacitor"
     ports:
-      - '3000:3000'
-    volumes:
-      - grafana-storage:/var/lib/grafana
-      - ./grafana-provisioning/:/etc/grafana/provisioning
-    depends_on:
-      - influxdb
-    environment:
-      - GF_SECURITY_ADMIN_USER=${GRAFANA_USERNAME}
-      - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_PASSWORD}     
+      - 9092:9092
+    networks:
+      - "monitoring"
 
   portainer:
     image: portainer/portainer-ce
@@ -117,16 +118,30 @@ services:
       - node-red-net
     volumes:
       - node-red-data:/data
-      
+   grafana:
+    image: grafana/grafana:latest
+    container_name: Grafana
+    restart: always
+    ports:
+      - '3000:3000'
+    volumes:
+      - grafana-storage:/var/lib/grafana
+      - ./grafana-provisioning/:/etc/grafana/provisioning
+    depends_on:
+      - influxdb
+    environment:
+      - GF_SECURITY_ADMIN_USER=${GRAFANA_USERNAME}
+      - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_PASSWORD}     
+     
 volumes:
   postgresqldata:
   redisdata:
-  influxdb-storage:
-  chronograf-storage:
+  chronograf:
+  influxdb:
   grafana-storage:
   portainer_data:
   node-red-data:  
   
 networks:
   node-red-net:
-
+  monitoring:
