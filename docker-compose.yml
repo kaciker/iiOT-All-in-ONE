@@ -50,7 +50,22 @@ services:
     restart: always
     ports:
       - 1883:1883
-    
+      
+  grafana:
+    image: grafana/grafana
+    container_name: Grafana
+    restart: always
+    ports:
+      - '3000:3000'
+    volumes:
+      - grafana-storage:/var/lib/grafana
+      - ./grafana-provisioning/:/etc/grafana/provisioning
+    depends_on:
+      - influxdb
+    environment:
+      - GF_SECURITY_ADMIN_USER=${GRAFANA_USERNAME}
+      - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_PASSWORD}
+       
   influxdb:
     container_name: influxdb
     image: influxdb:latest
@@ -118,22 +133,7 @@ services:
       - node-red-net
     volumes:
       - node-red-data:/data
-      
-   grafana:
-     image: grafana/grafana
-     container_name: Grafana
-     restart: always
-     ports:
-       - '3000:3000'
-     volumes:
-       - grafana-storage:/var/lib/grafana
-       - ./grafana-provisioning/:/etc/grafana/provisioning
-     depends_on:
-       - influxdb
-     environment:
-       - GF_SECURITY_ADMIN_USER=${GRAFANA_USERNAME}
-       - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_PASSWORD}     
-     
+           
 volumes:
   postgresqldata:
   redisdata:
