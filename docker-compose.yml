@@ -118,6 +118,7 @@ services:
       - node-red-net
     volumes:
       - node-red-data:/data
+      
    grafana:
      image: grafana/grafana:latest
      container_name: Grafana
