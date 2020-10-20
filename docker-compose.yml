@@ -1,16 +1,13 @@
 version: "3"
-	
 
 services:
   chirpstack-network-server:
     image: chirpstack/chirpstack-network-server:3
-    container_name: Chirp_Networkserver
     volumes:
       - ./configuration/chirpstack-network-server:/etc/chirpstack-network-server
 
   chirpstack-application-server:
     image: chirpstack/chirpstack-application-server:3
-    container_name: APP_Networkserver
     ports:
       - 8080:8080
     volumes:
@@ -18,7 +15,6 @@ services:
 
   chirpstack-gateway-bridge:
     image: chirpstack/chirpstack-gateway-bridge:3
-    container_name: gateway-bridge
     ports:
       - 1700:1700/udp
     volumes:
@@ -26,13 +22,11 @@ services:
 
   chirpstack-geolocation-server:
     image: chirpstack/chirpstack-geolocation-server:3
-    container_name: Geo_server
     volumes:
       - ./configuration/chirpstack-geolocation-server:/etc/chirpstack-geolocation-server
 
   postgresql:
     image: postgres:9.6-alpine
-    container_name: Pstgresql
     environment:
       - POSTGRES_PASSWORD=root
     volumes:
@@ -41,14 +35,11 @@ services:
 
   redis:
     image: redis:5-alpine
-    container_name: Redis
     volumes:
       - redisdata:/data
 
   mosquitto:
     image: eclipse-mosquitto
-    container_name: Mosquitto_Mqtt
-    restart: always
     ports:
       - 1883:1883
     
